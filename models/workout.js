@@ -3,8 +3,7 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema
 
 
-
-const workoutScema = new Schema (
+const workoutSchema = new Schema (
   {
     name: {type: String, require: true},
     weight: {type: Number, require: true},
@@ -13,6 +12,6 @@ const workoutScema = new Schema (
   }, {timestamps: true}
 )
 
-const Workout = mongoose.model("Workout", workoutScema)
+const Workout = mongoose.model("Workout", workoutSchema)
 
 export { Workout }
