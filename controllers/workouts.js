@@ -19,7 +19,6 @@ const create = async (req, res) => {
 }
 
 const index = async (req, res) => {
-  console.log('manager')
   try {
     const workouts = await Workout.find({})
     .populate('exerciser')

@@ -30,6 +30,28 @@ function addPhoto(req, res) {
   })
 }
 
+function showMyWorkouts(req, res) {
+  Profile.find({}).then((profiles) => {
+    Profile.findById(req.params.id)
+    .then((profile) => {
+      Workout.find({ exerciser: profile._id})
+      .then((workouts) => {
+        res.status(200).json(workouts)
+      })
+      .catch((err) => {
+        console.log(err)
+        res.status(500).json(err)
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+      res.status(500).json(err)
+    })
+  })
+}
 
-
-export { index, addPhoto }
+export {
+  index,
+  addPhoto,
+  showMyWorkouts,
+}
