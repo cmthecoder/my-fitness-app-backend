@@ -2,7 +2,6 @@ import { Workout } from "../models/workout.js";
 import { Profile } from "../models/profile.js";
 
 const create = async (req, res) => {
-  console.log('HEYEYEY', req.user.profile)
   try {
     req.body.exerciser = req.user.profile
     const workout = await Workout.create(req.body)
@@ -19,7 +18,20 @@ const create = async (req, res) => {
   }
 }
 
+const index = async (req, res) => {
+  console.log('manager')
+  try {
+    const workouts = await Workout.find({})
+    .populate('exerciser')
+    .sort({createdAt: 'desc'})
+    res.status(200).json(workouts)
+  } catch (error) {
+    res.status(500).json(err)
+  }
+}
+
 
 export {
   create,
+  index,
 }
