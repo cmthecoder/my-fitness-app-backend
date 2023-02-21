@@ -1,4 +1,5 @@
 import { Profile } from '../models/profile.js'
+// import { Workout } from '../models/workouts.js'
 import { v2 as cloudinary } from 'cloudinary'
 
 function index(req, res) {
