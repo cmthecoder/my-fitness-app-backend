@@ -12,9 +12,9 @@ const create = async (req, res) => {
     )
     workout.exerciser = profile
     res.status(201).json(workout)
-  } catch (error) {
-    console.log(error)
-    res.status(500).json(error)
+  } catch (err) {
+    console.log(err)
+    res.status(500).json(err)
   }
 }
 
@@ -24,7 +24,16 @@ const index = async (req, res) => {
     .populate('exerciser')
     .sort({createdAt: 'desc'})
     res.status(200).json(workouts)
-  } catch (error) {
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
+const show = async (req, res) => {
+  try {
+    const workout = await Workout.findById(req.params.id).populate('exerciser')
+    res.status(200).json(workout)
+  } catch (err) {
     res.status(500).json(err)
   }
 }
@@ -33,4 +42,5 @@ const index = async (req, res) => {
 export {
   create,
   index,
+  show,
 }
