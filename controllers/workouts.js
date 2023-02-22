@@ -38,9 +38,20 @@ const show = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    const workout = await Workout.findByIdAndUpdate(req.params.id, req.body, {
+      new: true
+    }).populate('exerciser')
+    res.status(200).json(workout)
+  } catch (error) {
+    res.status(500).json(err)
+  }
+}
 
 export {
   create,
   index,
   show,
+  update,
 }
