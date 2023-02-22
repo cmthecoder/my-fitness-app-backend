@@ -49,9 +49,22 @@ const update = async (req, res) => {
   }
 }
 
+const deleteWorkout = async (req, res) => {
+  try {
+    const workout = await Workout.findByIdAndDelete(req.params.id)
+    const profile = await Profile.findById(req.user.profile)
+    profile.workouts.remove({ _id: req.params.id})
+    await profile.save()
+    res.status(200).json(workout)
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
+
 export {
   create,
   index,
   show,
   update,
+  deleteWorkout as delete
 }

@@ -13,5 +13,6 @@ router.get('/', checkAuth, workoutsCtrl.index)
 router.get('/:id', checkAuth, workoutsCtrl.show)
 router.post('/', checkAuth, workoutsCtrl.create)
 router.put('/:id', checkAuth, workoutsCtrl.update)
+router.delete('/:id', checkAuth, workoutsCtrl.delete)
 
 export { router }
